@@ -1,0 +1,18 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+# SharpDevelop 5.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcesadorDeTxt", "ProcesadorDeTxt\ProcesadorDeTxt.csproj", "{E869EA69-3146-4626-95B5-C263F20165EC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E869EA69-3146-4626-95B5-C263F20165EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E869EA69-3146-4626-95B5-C263F20165EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E869EA69-3146-4626-95B5-C263F20165EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E869EA69-3146-4626-95B5-C263F20165EC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

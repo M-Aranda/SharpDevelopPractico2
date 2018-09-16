@@ -1,0 +1,8 @@
+C:\Users\Marce\Documents\SharpDevelop Projects\ProcesadorDeTxt\ProcesadorDeTxt\bin\Debug\ProcesadorDeTxt.exe.config
+C:\Users\Marce\Documents\SharpDevelop Projects\ProcesadorDeTxt\ProcesadorDeTxt\bin\Debug\ProcesadorDeTxt.exe
+C:\Users\Marce\Documents\SharpDevelop Projects\ProcesadorDeTxt\ProcesadorDeTxt\bin\Debug\ProcesadorDeTxt.pdb
+C:\Users\Marce\Documents\SharpDevelop Projects\ProcesadorDeTxt\ProcesadorDeTxt\obj\Debug\ProcesadorDeTxt.csprojResolveAssemblyReference.cache
+C:\Users\Marce\Documents\SharpDevelop Projects\ProcesadorDeTxt\ProcesadorDeTxt\obj\Debug\ProcesadorDeTxt.MainForm.resources
+C:\Users\Marce\Documents\SharpDevelop Projects\ProcesadorDeTxt\ProcesadorDeTxt\obj\Debug\ProcesadorDeTxt.csproj.GenerateResource.Cache
+C:\Users\Marce\Documents\SharpDevelop Projects\ProcesadorDeTxt\ProcesadorDeTxt\obj\Debug\ProcesadorDeTxt.exe
+C:\Users\Marce\Documents\SharpDevelop Projects\ProcesadorDeTxt\ProcesadorDeTxt\obj\Debug\ProcesadorDeTxt.pdb
