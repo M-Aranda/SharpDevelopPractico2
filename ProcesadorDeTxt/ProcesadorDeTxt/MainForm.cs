@@ -12,7 +12,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using ProcesadorDeTxt.Model;
-using System.IO;
+using System.IO; // necesario para usar StreamReader
+using System.Linq; //necesario para usar .Count();
+
 
 namespace ProcesadorDeTxt
 {
@@ -47,6 +49,10 @@ namespace ProcesadorDeTxt
 			
 		
 		}
+		
+		
+		
+		
 		void BtnExaminarClick(object sender, EventArgs e)
 		{
 			OpenFileDialog oFDText = new OpenFileDialog(); // inicializa un nuevo objeto del tipo OpenFileDialog
@@ -70,6 +76,41 @@ namespace ProcesadorDeTxt
         		StreamReader sr = new StreamReader(oFDText.FileName); // crear objeto del tipo StreamReader
     			rtxTexto.Text = sr.ReadToEnd(); // leer de principio a fin
     			sr.Close(); // cerrar lector de corriente
+    			
+    			
+    			int cantPalabras = rtxTexto.Text.Split(' ', '\n', '\t').Count(); //contar palabras, ' ' es espacio
+    			// '\n' es linea nueva y '\t' es tabulador
+    		
+				
+				
+				
+
+    			
+				int caracteres=rtxTexto.Text.Length-(1*rtxTexto.Lines.Count()-1); //cuenta caracteres
+
+    			char[] vocales = new char[] { 'a', 'e', 'i', 'o', 'u' };
+    			char[] consantes = new char[]{'b','c','d','f','g','h','j','k','l', 'm', 'n', 'p', 'q', 'r',
+    					's', 't', 'u','v', 'w', 'x', 'y', 'z'};
+    			char[] espacios = new char[] { ' ' };
+    			char[] tabuladores= new char[]{'	'};
+    			
+    			
+    			int cantEspacios = rtxTexto.Text.Count(x => espacios.Any(y => char.ToLower(x) == y)); // cuenta espacios
+    			int canTabuladores= rtxTexto.Text.Count(x => tabuladores.Any(y => char.ToLower(x) == y)); // cuenta tabuladores
+    			int cantLineas = rtxTexto.Lines.Count();
+    			int cantVocales = rtxTexto.Text.Count(x => vocales.Any(y => char.ToLower(x) == y)); //cuenta vocales
+    			int cantConsonantes = rtxTexto.Text.Count(x => consantes.Any(y => char.ToLower(x) == y)); //cuenta consonanntes
+    			
+    			
+    			lblPalabras.Text="Palabras                                                                                                                     :"+cantPalabras;
+    			lblCaracteres.Text="Caracteres                                                                                                                 :"+caracteres;
+    			lblEspaciosEnBlanco.Text="Espacios en blanco                                                                                                   :"+cantEspacios;
+    			lblTabuladores.Text="Tabuladores                                                                                                               :"+canTabuladores;
+    			lblLineas.Text="Líneas                                                                                                                        :"+cantLineas;
+    			lblVocales.Text="Vocales                                                                                                                      :"+cantVocales;
+    			lblConsonantes.Text="Consonantes                                                                                                              :"+cantConsonantes;
+
+    			
     			}
 		}
 		

@@ -138,7 +138,7 @@ namespace ProcesadorDeTxt
 			// 
 			this.lblPalabras.Location = new System.Drawing.Point(26, 185);
 			this.lblPalabras.Name = "lblPalabras";
-			this.lblPalabras.Size = new System.Drawing.Size(65, 23);
+			this.lblPalabras.Size = new System.Drawing.Size(713, 23);
 			this.lblPalabras.TabIndex = 7;
 			this.lblPalabras.Text = "Palabras";
 			// 
@@ -146,7 +146,7 @@ namespace ProcesadorDeTxt
 			// 
 			this.lblCaracteres.Location = new System.Drawing.Point(26, 208);
 			this.lblCaracteres.Name = "lblCaracteres";
-			this.lblCaracteres.Size = new System.Drawing.Size(68, 19);
+			this.lblCaracteres.Size = new System.Drawing.Size(713, 19);
 			this.lblCaracteres.TabIndex = 8;
 			this.lblCaracteres.Text = "Caracteres";
 			// 
@@ -154,7 +154,7 @@ namespace ProcesadorDeTxt
 			// 
 			this.lblEspaciosEnBlanco.Location = new System.Drawing.Point(26, 227);
 			this.lblEspaciosEnBlanco.Name = "lblEspaciosEnBlanco";
-			this.lblEspaciosEnBlanco.Size = new System.Drawing.Size(100, 23);
+			this.lblEspaciosEnBlanco.Size = new System.Drawing.Size(713, 23);
 			this.lblEspaciosEnBlanco.TabIndex = 9;
 			this.lblEspaciosEnBlanco.Text = "Espacios en blanco";
 			// 
@@ -162,7 +162,7 @@ namespace ProcesadorDeTxt
 			// 
 			this.lblLineas.Location = new System.Drawing.Point(26, 273);
 			this.lblLineas.Name = "lblLineas";
-			this.lblLineas.Size = new System.Drawing.Size(100, 23);
+			this.lblLineas.Size = new System.Drawing.Size(713, 23);
 			this.lblLineas.TabIndex = 10;
 			this.lblLineas.Text = "Líneas";
 			// 
@@ -170,7 +170,7 @@ namespace ProcesadorDeTxt
 			// 
 			this.lblTabuladores.Location = new System.Drawing.Point(26, 250);
 			this.lblTabuladores.Name = "lblTabuladores";
-			this.lblTabuladores.Size = new System.Drawing.Size(100, 23);
+			this.lblTabuladores.Size = new System.Drawing.Size(713, 23);
 			this.lblTabuladores.TabIndex = 11;
 			this.lblTabuladores.Text = "Tabuladores";
 			// 
@@ -178,7 +178,7 @@ namespace ProcesadorDeTxt
 			// 
 			this.lblVocales.Location = new System.Drawing.Point(26, 296);
 			this.lblVocales.Name = "lblVocales";
-			this.lblVocales.Size = new System.Drawing.Size(100, 23);
+			this.lblVocales.Size = new System.Drawing.Size(713, 23);
 			this.lblVocales.TabIndex = 12;
 			this.lblVocales.Text = "Vocales";
 			// 
@@ -186,7 +186,7 @@ namespace ProcesadorDeTxt
 			// 
 			this.lblConsonantes.Location = new System.Drawing.Point(26, 319);
 			this.lblConsonantes.Name = "lblConsonantes";
-			this.lblConsonantes.Size = new System.Drawing.Size(79, 22);
+			this.lblConsonantes.Size = new System.Drawing.Size(713, 22);
 			this.lblConsonantes.TabIndex = 13;
 			this.lblConsonantes.Text = "Consonantes";
 			// 
