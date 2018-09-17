@@ -121,6 +121,12 @@ namespace ProcesadorDeTxt
 			
 			if(opcionSeleccionada.Nombre=="Espacios en blanco"){
 				
+				/*var newstr = String.Join("",rtxTexto.ToString().Where(c=>!char.IsWhiteSpace(c)));
+				rtxTexto.Text=newstr;
+				*/
+				
+				rtxTexto.Text = Regex.Replace(rtxTexto.Text, @"\s+", ""); // remueve y junta todo
+				
 			}else if(opcionSeleccionada.Nombre=="Vocales"){
 				
 			rtxTexto.Text = rtxTexto.Text.Replace("a","");
