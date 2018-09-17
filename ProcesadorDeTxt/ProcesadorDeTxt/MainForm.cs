@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using ProcesadorDeTxt.Model;
 using System.IO; // necesario para usar StreamReader
 using System.Linq; //necesario para usar .Count();
+using System.Text.RegularExpressions;
 
 
 namespace ProcesadorDeTxt
@@ -90,7 +91,7 @@ namespace ProcesadorDeTxt
 
     			char[] vocales = new char[] { 'a', 'e', 'i', 'o', 'u' };
     			char[] consantes = new char[]{'b','c','d','f','g','h','j','k','l', 'm', 'n', 'p', 'q', 'r',
-    					's', 't', 'u','v', 'w', 'x', 'y', 'z'};
+    			's', 't', 'u','v', 'w', 'x', 'y', 'z'};
     			char[] espacios = new char[] { ' ' };
     			char[] tabuladores= new char[]{'	'};
     			
@@ -112,6 +113,54 @@ namespace ProcesadorDeTxt
 
     			
     			}
+		}
+		void BtnProcesarClick(object sender, EventArgs e)
+		{
+			Escritura opcionSeleccionada=(Escritura)cboQuitar.SelectedItem;
+			
+			
+			if(opcionSeleccionada.Nombre=="Espacios en blanco"){
+				
+			}else if(opcionSeleccionada.Nombre=="Vocales"){
+				
+			rtxTexto.Text = rtxTexto.Text.Replace("a","");
+			rtxTexto.Text = rtxTexto.Text.Replace("e","");
+			rtxTexto.Text = rtxTexto.Text.Replace("i","");
+			rtxTexto.Text = rtxTexto.Text.Replace("o","");
+			rtxTexto.Text = rtxTexto.Text.Replace("u","");
+				
+				
+			}else if(opcionSeleccionada.Nombre=="Consonantes"){
+			
+			rtxTexto.Text = rtxTexto.Text.Replace("b","");
+			rtxTexto.Text = rtxTexto.Text.Replace("c","");
+			rtxTexto.Text = rtxTexto.Text.Replace("d","");
+			rtxTexto.Text = rtxTexto.Text.Replace("f","");
+			rtxTexto.Text = rtxTexto.Text.Replace("g","");
+			rtxTexto.Text = rtxTexto.Text.Replace("h","");
+			rtxTexto.Text = rtxTexto.Text.Replace("j","");
+			rtxTexto.Text = rtxTexto.Text.Replace("k","");
+			rtxTexto.Text = rtxTexto.Text.Replace("l","");
+			rtxTexto.Text = rtxTexto.Text.Replace("m","");
+			rtxTexto.Text = rtxTexto.Text.Replace("n","");
+			rtxTexto.Text = rtxTexto.Text.Replace("p","");
+			rtxTexto.Text = rtxTexto.Text.Replace("q","");
+			rtxTexto.Text = rtxTexto.Text.Replace("r","");
+			rtxTexto.Text = rtxTexto.Text.Replace("s","");
+			rtxTexto.Text = rtxTexto.Text.Replace("t","");
+			rtxTexto.Text = rtxTexto.Text.Replace("v","");
+			rtxTexto.Text = rtxTexto.Text.Replace("w","");
+			rtxTexto.Text = rtxTexto.Text.Replace("x","");
+			rtxTexto.Text = rtxTexto.Text.Replace("y","");	
+			rtxTexto.Text = rtxTexto.Text.Replace("z","");			
+				
+				
+				
+			}
+			
+			
+			
+	
 		}
 		
 		

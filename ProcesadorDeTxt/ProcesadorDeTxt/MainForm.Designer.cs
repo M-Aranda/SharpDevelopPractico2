@@ -91,6 +91,7 @@ namespace ProcesadorDeTxt
 			this.btnProcesar.TabIndex = 1;
 			this.btnProcesar.Text = "Procesar";
 			this.btnProcesar.UseVisualStyleBackColor = true;
+			this.btnProcesar.Click += new System.EventHandler(this.BtnProcesarClick);
 			// 
 			// btnGuardarComo
 			// 
