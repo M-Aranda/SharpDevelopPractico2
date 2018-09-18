@@ -101,6 +101,7 @@ namespace ProcesadorDeTxt
 			this.btnGuardarComo.TabIndex = 2;
 			this.btnGuardarComo.Text = "Guardar como ...";
 			this.btnGuardarComo.UseVisualStyleBackColor = true;
+			this.btnGuardarComo.Click += new System.EventHandler(this.BtnGuardarComoClick);
 			// 
 			// lblQuitar
 			// 
@@ -202,6 +203,10 @@ namespace ProcesadorDeTxt
 			// oFDTxt
 			// 
 			this.oFDTxt.FileName = "openFileDialog1";
+			// 
+			// sFDGuardarComo
+			// 
+			this.sFDGuardarComo.FileOk += new System.ComponentModel.CancelEventHandler(this.SFDGuardarComoFileOk);
 			// 
 			// MainForm
 			// 

@@ -52,6 +52,33 @@ namespace ProcesadorDeTxt
 		}
 		
 		
+		public void ContarTodo(){
+			    int cantPalabras = rtxTexto.Text.Split(' ', '\n', '\t').Count(); //contar palabras, ' ' es espacio
+    			// '\n' es linea nueva y '\t' es tabulador
+				int caracteres=rtxTexto.Text.Length-(1*rtxTexto.Lines.Count()-1); //cuenta caracteres en cada linea
+
+    			char[] vocales = new char[] { 'a', 'e', 'i', 'o', 'u' };
+    			char[] consantes = new char[]{'b','c','d','f','g','h','j','k','l', 'm', 'n', 'p', 'q', 'r',
+    			's', 't', 'u','v', 'w', 'x', 'y', 'z'};
+    			char[] espacios = new char[] { ' ' };
+    			char[] tabuladores= new char[]{'	'};
+    			
+    			
+    			int cantEspacios = rtxTexto.Text.Count(x => espacios.Any(y => char.ToLower(x) == y)); // cuenta espacios
+    			int canTabuladores= rtxTexto.Text.Count(x => tabuladores.Any(y => char.ToLower(x) == y)); // cuenta tabuladores
+    			int cantLineas = rtxTexto.Lines.Count();
+    			int cantVocales = rtxTexto.Text.Count(x => vocales.Any(y => char.ToLower(x) == y)); //cuenta vocales
+    			int cantConsonantes = rtxTexto.Text.Count(x => consantes.Any(y => char.ToLower(x) == y)); //cuenta consonanntes
+    			
+    			
+    			lblPalabras.Text="Palabras                     :"+cantPalabras;
+    			lblCaracteres.Text="Caracteres                 :"+caracteres;
+    			lblEspaciosEnBlanco.Text="Espacios en blanco   :"+cantEspacios;
+    			lblTabuladores.Text="Tabuladores               :"+canTabuladores;
+    			lblLineas.Text="Líneas                        :"+cantLineas;
+    			lblVocales.Text="Vocales                      :"+cantVocales;
+    			lblConsonantes.Text="Consonantes              :"+cantConsonantes;
+		}
 		
 		
 		void BtnExaminarClick(object sender, EventArgs e)
@@ -78,41 +105,10 @@ namespace ProcesadorDeTxt
     			rtxTexto.Text = sr.ReadToEnd(); // leer de principio a fin
     			sr.Close(); // cerrar lector de corriente
     			
-    			
-    			int cantPalabras = rtxTexto.Text.Split(' ', '\n', '\t').Count(); //contar palabras, ' ' es espacio
-    			// '\n' es linea nueva y '\t' es tabulador
-    		
-				
-				
-				
-
-    			
-				int caracteres=rtxTexto.Text.Length-(1*rtxTexto.Lines.Count()-1); //cuenta caracteres
-
-    			char[] vocales = new char[] { 'a', 'e', 'i', 'o', 'u' };
-    			char[] consantes = new char[]{'b','c','d','f','g','h','j','k','l', 'm', 'n', 'p', 'q', 'r',
-    			's', 't', 'u','v', 'w', 'x', 'y', 'z'};
-    			char[] espacios = new char[] { ' ' };
-    			char[] tabuladores= new char[]{'	'};
-    			
-    			
-    			int cantEspacios = rtxTexto.Text.Count(x => espacios.Any(y => char.ToLower(x) == y)); // cuenta espacios
-    			int canTabuladores= rtxTexto.Text.Count(x => tabuladores.Any(y => char.ToLower(x) == y)); // cuenta tabuladores
-    			int cantLineas = rtxTexto.Lines.Count();
-    			int cantVocales = rtxTexto.Text.Count(x => vocales.Any(y => char.ToLower(x) == y)); //cuenta vocales
-    			int cantConsonantes = rtxTexto.Text.Count(x => consantes.Any(y => char.ToLower(x) == y)); //cuenta consonanntes
-    			
-    			
-    			lblPalabras.Text="Palabras                                                                                                                     :"+cantPalabras;
-    			lblCaracteres.Text="Caracteres                                                                                                                 :"+caracteres;
-    			lblEspaciosEnBlanco.Text="Espacios en blanco                                                                                                   :"+cantEspacios;
-    			lblTabuladores.Text="Tabuladores                                                                                                               :"+canTabuladores;
-    			lblLineas.Text="Líneas                                                                                                                        :"+cantLineas;
-    			lblVocales.Text="Vocales                                                                                                                      :"+cantVocales;
-    			lblConsonantes.Text="Consonantes                                                                                                              :"+cantConsonantes;
-
-    			
+    			ContarTodo();
     			}
+			
+			
 		}
 		void BtnProcesarClick(object sender, EventArgs e)
 		{
@@ -120,13 +116,20 @@ namespace ProcesadorDeTxt
 			
 			
 			if(opcionSeleccionada.Nombre=="Espacios en blanco"){
+				rtxTexto.Text = Regex.Replace(rtxTexto.Text, @"\s+", ""); // remueve y junta todo	
 				
-				/*var newstr = String.Join("",rtxTexto.ToString().Where(c=>!char.IsWhiteSpace(c)));
-				rtxTexto.Text=newstr;
-				*/
-				
-				rtxTexto.Text = Regex.Replace(rtxTexto.Text, @"\s+", ""); // remueve y junta todo
-				
+				/*
+				String[] s = rtxTexto.Lines; 
+		for (int i = 0; i < s.Length; i++)
+		{
+			s[i].Replace(" ", String.Empty);
+			rtxTexto.Lines=s;
+		}
+		*/
+		
+		
+
+		
 			}else if(opcionSeleccionada.Nombre=="Vocales"){
 				
 			rtxTexto.Text = rtxTexto.Text.Replace("a","");
@@ -134,8 +137,7 @@ namespace ProcesadorDeTxt
 			rtxTexto.Text = rtxTexto.Text.Replace("i","");
 			rtxTexto.Text = rtxTexto.Text.Replace("o","");
 			rtxTexto.Text = rtxTexto.Text.Replace("u","");
-				
-				
+			
 			}else if(opcionSeleccionada.Nombre=="Consonantes"){
 			
 			rtxTexto.Text = rtxTexto.Text.Replace("b","");
@@ -159,13 +161,54 @@ namespace ProcesadorDeTxt
 			rtxTexto.Text = rtxTexto.Text.Replace("x","");
 			rtxTexto.Text = rtxTexto.Text.Replace("y","");	
 			rtxTexto.Text = rtxTexto.Text.Replace("z","");			
-				
-				
-				
+		
 			}
 			
+
+			ContarTodo();
+			//int cantPalabras = rtxTexto.Text.Split(' ').Count();
+			//lblPalabras.Text="Palabras                    :"+cantPalabras;
+      	
+
 			
+			int cantLineas = rtxTexto.Lines.Count();;
+				if(cantLineas==0){
+				rtxTexto.Clear();
+				ContarTodo();
+				lblPalabras.Text="Palabras                     :"+0;
+    			lblCaracteres.Text="Caracteres                 :"+0;
+				
+					
+				}
 			
+			/*
+			MatchCollection wordColl = Regex.Matches(rtxTexto.Text, @"[\W]+");
+			cantPalabras=wordColl.Count;
+			lblPalabras.Text="Palabras                    :"+cantPalabras;
+			*/
+			
+	
+		}
+		
+		void SFDGuardarComoFileOk(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			MessageBox.Show("Guardado exitoso!");
+		}
+		
+		void BtnGuardarComoClick(object sender, EventArgs e)
+		{
+			var sFDGuardarComo = new SaveFileDialog();
+			sFDGuardarComo.Title="Guardar como...";
+			sFDGuardarComo.Filter = "Text Files (*.txt)|*.txt";//|RTF Files (*.rtf)|*.rtf"; limitar a formato rtf
+			sFDGuardarComo.AddExtension = true;
+			if (sFDGuardarComo.ShowDialog() == System.Windows.Forms.DialogResult.OK){
+    			var extension = Path.GetExtension(sFDGuardarComo.FileName);
+    			if(extension.ToLower()==".txt") {
+        		rtxTexto.SaveFile(sFDGuardarComo.FileName, RichTextBoxStreamType.PlainText);
+    			}/*else{
+        		rtxTexto.SaveFile(sFDGuardarComo.FileName, RichTextBoxStreamType.RichText);//innecesario en este caso
+    			}*/
+			}
 	
 		}
 		
