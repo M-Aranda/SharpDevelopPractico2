@@ -14,7 +14,7 @@ using System.Windows.Forms;
 using ProcesadorDeTxt.Model;
 using System.IO; // necesario para usar StreamReader
 using System.Linq; //necesario para usar .Count();
-using System.Text.RegularExpressions;
+using System.Text.RegularExpressions; // necesario para Regex;
 
 
 namespace ProcesadorDeTxt
@@ -55,10 +55,14 @@ namespace ProcesadorDeTxt
 		public void ContarTodo(){
 			    int cantPalabras = rtxTexto.Text.Split(' ', '\n', '\t').Count(); //contar palabras, ' ' es espacio
     			// '\n' es linea nueva y '\t' es tabulador
+    			
+    			
+    			
+    			
 				int caracteres=rtxTexto.Text.Length-(1*rtxTexto.Lines.Count()-1); //cuenta caracteres en cada linea
 
-    			char[] vocales = new char[] { 'a', 'e', 'i', 'o', 'u' };
-    			char[] consantes = new char[]{'b','c','d','f','g','h','j','k','l', 'm', 'n', 'p', 'q', 'r',
+    			char[] vocales = new char[] { 'a', 'e', 'i', 'o', 'u','á', 'é', 'í', 'ó', 'ú' };
+    			char[] consantes = new char[]{'b','c','d','f','g','h','j','k','l', 'm', 'n','ñ', 'p', 'q', 'r',
     			's', 't', 'u','v', 'w', 'x', 'y', 'z'};
     			char[] espacios = new char[] { ' ' };
     			char[] tabuladores= new char[]{'	'};
@@ -81,6 +85,9 @@ namespace ProcesadorDeTxt
 		}
 		
 		
+
+		
+		
 		void BtnExaminarClick(object sender, EventArgs e)
 		{
 			OpenFileDialog oFDText = new OpenFileDialog(); // inicializa un nuevo objeto del tipo OpenFileDialog
@@ -91,7 +98,7 @@ namespace ProcesadorDeTxt
 			oFDText.CheckPathExists = true; // se fija que la ruta exista
 			oFDText.DefaultExt = "txt"; // fijar extesion por defecto
 
-    		oFDText.Filter = "Text files (*.txt)|*.txt";//|All files (*.*)|*.*  // filtro (el combo box del tipo de archivo del file dialog)
+    		oFDText.Filter = "Text files (*.txt)|*.txt";//|All files (*.*)|*.*";  // filtro (el combo box del tipo de archivo del file dialog)
 
     		oFDText.FilterIndex = 2; //filtrar indice
 			oFDText.RestoreDirectory = true; // restaurar directorio
@@ -101,9 +108,14 @@ namespace ProcesadorDeTxt
 			if (oFDText.ShowDialog() == DialogResult.OK) // si el en dialogo hubo confirmacion
    			 {
 				txtRutaAqui.Text = oFDText.FileName; //escribir la ruta del archivo
-        		StreamReader sr = new StreamReader(oFDText.FileName); // crear objeto del tipo StreamReader
+        		StreamReader sr = new StreamReader(oFDText.FileName,System.Text.Encoding.Default, false, 512); // crear objeto del tipo StreamReader
+        		//La propiedad de Encoding, Default, permite reconocer tildes del español
     			rtxTexto.Text = sr.ReadToEnd(); // leer de principio a fin
+    			
+    			
     			sr.Close(); // cerrar lector de corriente
+    			
+    			
     			
     			ContarTodo();
     			}
@@ -118,25 +130,39 @@ namespace ProcesadorDeTxt
 			if(opcionSeleccionada.Nombre=="Espacios en blanco"){
 				rtxTexto.Text = Regex.Replace(rtxTexto.Text, @"\s+", ""); // remueve y junta todo	
 				
-				/*
-				String[] s = rtxTexto.Lines; 
+				/*String[] s = rtxTexto.Lines; 
 		for (int i = 0; i < s.Length; i++)
 		{
 			s[i].Replace(" ", String.Empty);
 			rtxTexto.Lines=s;
 		}
 		*/
-		
-		
 
 		
 			}else if(opcionSeleccionada.Nombre=="Vocales"){
-				
+
 			rtxTexto.Text = rtxTexto.Text.Replace("a","");
 			rtxTexto.Text = rtxTexto.Text.Replace("e","");
 			rtxTexto.Text = rtxTexto.Text.Replace("i","");
 			rtxTexto.Text = rtxTexto.Text.Replace("o","");
 			rtxTexto.Text = rtxTexto.Text.Replace("u","");
+			rtxTexto.Text = rtxTexto.Text.Replace("A","");
+			rtxTexto.Text = rtxTexto.Text.Replace("E","");
+			rtxTexto.Text = rtxTexto.Text.Replace("I","");
+			rtxTexto.Text = rtxTexto.Text.Replace("O","");
+			rtxTexto.Text = rtxTexto.Text.Replace("U","");
+			
+			rtxTexto.Text = rtxTexto.Text.Replace("á","");
+			rtxTexto.Text = rtxTexto.Text.Replace("é","");
+			rtxTexto.Text = rtxTexto.Text.Replace("í","");
+			rtxTexto.Text = rtxTexto.Text.Replace("ó","");
+			rtxTexto.Text = rtxTexto.Text.Replace("ú","");
+			rtxTexto.Text = rtxTexto.Text.Replace("Á","");
+			rtxTexto.Text = rtxTexto.Text.Replace("É","");
+			rtxTexto.Text = rtxTexto.Text.Replace("Í","");
+			rtxTexto.Text = rtxTexto.Text.Replace("Ó","");
+			rtxTexto.Text = rtxTexto.Text.Replace("Ú","");
+			
 			
 			}else if(opcionSeleccionada.Nombre=="Consonantes"){
 			
@@ -151,6 +177,7 @@ namespace ProcesadorDeTxt
 			rtxTexto.Text = rtxTexto.Text.Replace("l","");
 			rtxTexto.Text = rtxTexto.Text.Replace("m","");
 			rtxTexto.Text = rtxTexto.Text.Replace("n","");
+			rtxTexto.Text = rtxTexto.Text.Replace("ñ","");
 			rtxTexto.Text = rtxTexto.Text.Replace("p","");
 			rtxTexto.Text = rtxTexto.Text.Replace("q","");
 			rtxTexto.Text = rtxTexto.Text.Replace("r","");
@@ -160,7 +187,29 @@ namespace ProcesadorDeTxt
 			rtxTexto.Text = rtxTexto.Text.Replace("w","");
 			rtxTexto.Text = rtxTexto.Text.Replace("x","");
 			rtxTexto.Text = rtxTexto.Text.Replace("y","");	
-			rtxTexto.Text = rtxTexto.Text.Replace("z","");			
+			rtxTexto.Text = rtxTexto.Text.Replace("z","");
+			rtxTexto.Text = rtxTexto.Text.Replace("B","");
+			rtxTexto.Text = rtxTexto.Text.Replace("C","");
+			rtxTexto.Text = rtxTexto.Text.Replace("D","");
+			rtxTexto.Text = rtxTexto.Text.Replace("F","");
+			rtxTexto.Text = rtxTexto.Text.Replace("G","");
+			rtxTexto.Text = rtxTexto.Text.Replace("H","");
+			rtxTexto.Text = rtxTexto.Text.Replace("J","");
+			rtxTexto.Text = rtxTexto.Text.Replace("K","");
+			rtxTexto.Text = rtxTexto.Text.Replace("L","");
+			rtxTexto.Text = rtxTexto.Text.Replace("M","");
+			rtxTexto.Text = rtxTexto.Text.Replace("N","");
+			rtxTexto.Text = rtxTexto.Text.Replace("Ñ","");
+			rtxTexto.Text = rtxTexto.Text.Replace("P","");
+			rtxTexto.Text = rtxTexto.Text.Replace("Q","");
+			rtxTexto.Text = rtxTexto.Text.Replace("R","");
+			rtxTexto.Text = rtxTexto.Text.Replace("S","");
+			rtxTexto.Text = rtxTexto.Text.Replace("T","");
+			rtxTexto.Text = rtxTexto.Text.Replace("V","");
+			rtxTexto.Text = rtxTexto.Text.Replace("W","");
+			rtxTexto.Text = rtxTexto.Text.Replace("X","");
+			rtxTexto.Text = rtxTexto.Text.Replace("Y","");	
+			rtxTexto.Text = rtxTexto.Text.Replace("Z","");			
 		
 			}
 			
