@@ -55,9 +55,7 @@ namespace ProcesadorDeTxt
 		public void ContarTodo(){
 			    int cantPalabras = rtxTexto.Text.Split(' ', '\n', '\t').Count(); //contar palabras, ' ' es espacio
     			// '\n' es linea nueva y '\t' es tabulador
-    			
-    			
-    			
+			
     			
 				int caracteres=rtxTexto.Text.Length-(1*rtxTexto.Lines.Count()-1); //cuenta caracteres en cada linea
 
@@ -73,7 +71,8 @@ namespace ProcesadorDeTxt
     			int cantLineas = rtxTexto.Lines.Count();
     			int cantVocales = rtxTexto.Text.Count(x => vocales.Any(y => char.ToLower(x) == y)); //cuenta vocales
     			int cantConsonantes = rtxTexto.Text.Count(x => consantes.Any(y => char.ToLower(x) == y)); //cuenta consonanntes
-    			
+    			//cantPalabras=(cantPalabras)-cantEspacios;
+    			caracteres=caracteres-canTabuladores-cantEspacios;
     			
     			lblPalabras.Text="Palabras                     :"+cantPalabras;
     			lblCaracteres.Text="Caracteres                 :"+caracteres;
@@ -83,7 +82,7 @@ namespace ProcesadorDeTxt
     			lblVocales.Text="Vocales                      :"+cantVocales;
     			lblConsonantes.Text="Consonantes              :"+cantConsonantes;
 		}
-		
+ 
 		
 
 		
@@ -114,9 +113,6 @@ namespace ProcesadorDeTxt
     			
     			
     			sr.Close(); // cerrar lector de corriente
-    			
-    			
-    			
     			ContarTodo();
     			}
 			
@@ -215,12 +211,22 @@ namespace ProcesadorDeTxt
 			
 
 			ContarTodo();
-			//int cantPalabras = rtxTexto.Text.Split(' ').Count();
-			//lblPalabras.Text="Palabras                    :"+cantPalabras;
-      	
+			MatchCollection wordColl = Regex.Matches(rtxTexto.Text, @"[\W]+");
+			int cantPalabras=wordColl.Count;
+			lblPalabras.Text="Palabras                    :"+cantPalabras;
 
+			int cantLineas = rtxTexto.Lines.Count();
+			char[] vocales = new char[] { 'a', 'e', 'i', 'o', 'u','á', 'é', 'í', 'ó', 'ú' };
+    		char[] consantes = new char[]{'b','c','d','f','g','h','j','k','l', 'm', 'n','ñ', 'p', 'q', 'r',
+    		's', 't', 'u','v', 'w', 'x', 'y', 'z'};
+			int cantVocales = rtxTexto.Text.Count(x => vocales.Any(y => char.ToLower(x) == y));
+    		int cantConsonantes = rtxTexto.Text.Count(x => consantes.Any(y => char.ToLower(x) == y));
 			
-			int cantLineas = rtxTexto.Lines.Count();;
+    		if(cantVocales==0 && cantConsonantes==0){
+    			lblPalabras.Text="Palabras                     :"+0;
+    		}
+			
+			
 				if(cantLineas==0){
 				rtxTexto.Clear();
 				ContarTodo();
@@ -230,11 +236,9 @@ namespace ProcesadorDeTxt
 					
 				}
 			
-			/*
-			MatchCollection wordColl = Regex.Matches(rtxTexto.Text, @"[\W]+");
-			cantPalabras=wordColl.Count;
-			lblPalabras.Text="Palabras                    :"+cantPalabras;
-			*/
+			
+
+			
 			
 	
 		}
