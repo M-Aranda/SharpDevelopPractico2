@@ -124,7 +124,9 @@ namespace ProcesadorDeTxt
 			
 			
 			if(opcionSeleccionada.Nombre=="Espacios en blanco"){
-				rtxTexto.Text = Regex.Replace(rtxTexto.Text, @"\s+", ""); // remueve y junta todo	
+				//rtxTexto.Text = Regex.Replace(rtxTexto.Text, @"\s+", ""); // remueve y junta todo	
+				rtxTexto.Text = rtxTexto.Text.Replace(" ","");//espacios
+				rtxTexto.Text = rtxTexto.Text.Replace("	","");//tabs
 				
 				/*String[] s = rtxTexto.Lines; 
 		for (int i = 0; i < s.Length; i++)
