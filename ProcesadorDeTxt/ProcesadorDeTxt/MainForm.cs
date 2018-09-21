@@ -55,8 +55,8 @@ namespace ProcesadorDeTxt
 		public void ContarTodo(){
 			    int cantPalabras = rtxTexto.Text.Split(' ', '\n', '\t').Count(); //contar palabras, ' ' es espacio
     			// '\n' es linea nueva y '\t' es tabulador
-			
     			
+				
 				int caracteres=rtxTexto.Text.Length-(1*rtxTexto.Lines.Count()-1); //cuenta caracteres en cada linea
 
     			char[] vocales = new char[] { 'a', 'e', 'i', 'o', 'u','á', 'é', 'í', 'ó', 'ú' };
@@ -73,6 +73,7 @@ namespace ProcesadorDeTxt
     			int cantConsonantes = rtxTexto.Text.Count(x => consantes.Any(y => char.ToLower(x) == y)); //cuenta consonanntes
     			//cantPalabras=(cantPalabras)-cantEspacios;
     			caracteres=caracteres-canTabuladores-cantEspacios;
+    			
     			
     			lblPalabras.Text="Palabras                     :"+cantPalabras;
     			lblCaracteres.Text="Caracteres                 :"+caracteres;
@@ -239,25 +240,53 @@ namespace ProcesadorDeTxt
 			cantConsonantesEstaString =rtxTexto.Lines[i].Count(x => consantes.Any(y => char.ToLower(x) == y));
 			
 			if(actual.Contains(" ") || actual.Contains("	")){
-				cantPalabras+=Regex.Matches(actual, " ").Count;
-				cantPalabras+=Regex.Matches(actual, "	").Count;
+				//cantPalabras+=Regex.Matches(actual, " ").Count;
+				//cantPalabras+=Regex.Matches(actual, "	").Count;
 				cantLineas++;
 				
+				
 			}else if(cantConsonantesEstaString>0 || cantVocalesEstaString>0)  {
-					cantPalabras++;
-					cantLineas++;
+					//cantPalabras++;
+					//cantLineas++;
 			}else if(!actual.Contains("")){
 				cantLineas-=1;
 			}
-
-		
+			
+			Char [] para={' ','	'};
+			String [] palabras=actual.Split(para);
+			List<String>pa=new List<String>();
+			
+			foreach (var element in palabras) {
+				pa.Add(element);
 			}
-			/*
-			if(opcionSeleccionada.Nombre=="Vocales"){
-				cantPalabras+=cantEspacios;
-			}else if(opcionSeleccionada.Nombre=="Consonantes"){
-				cantPalabras-=cantEspacios;
-			}*/
+			
+			foreach (var element in pa) {
+				//MessageBox.Show(element);
+				// if con multiples condiciones. Para mayor info, preguntele a Marcelo Aranda
+				if(element.Contains("a") || element.Contains("b") || element.Contains("c") || element.Contains("d") ||
+				   element.Contains("e") || element.Contains("f") || element.Contains("g") || element.Contains("h") ||
+				   element.Contains("i") || element.Contains("j") || element.Contains("k") || element.Contains("l") ||
+				   element.Contains("m") || element.Contains("n") || element.Contains("ñ") || element.Contains("o") ||
+				   element.Contains("p") || element.Contains("q") || element.Contains("r") || element.Contains("s") ||
+				   element.Contains("t") || element.Contains("u") || element.Contains("v") || element.Contains("w") ||
+				   element.Contains("x") || element.Contains("y") || element.Contains("z") || element.Contains("á") ||
+				   element.Contains("é") || element.Contains("í") || element.Contains("ó") || element.Contains("ú") ||
+				   element.Contains("A") || element.Contains("B") || element.Contains("C") || element.Contains("D") ||
+				   element.Contains("E") || element.Contains("F") || element.Contains("G") || element.Contains("H") ||
+				   element.Contains("I") || element.Contains("J") || element.Contains("K") || element.Contains("L") ||
+				   element.Contains("M") || element.Contains("N") || element.Contains("Ñ") || element.Contains("O") ||
+				   element.Contains("P") || element.Contains("Q") || element.Contains("R") || element.Contains("S") ||
+				   element.Contains("T") || element.Contains("U") || element.Contains("V") || element.Contains("W") ||
+				   element.Contains("X") || element.Contains("Y") || element.Contains("Z") || element.Contains("Á") ||
+				   element.Contains("É") || element.Contains("Í") || element.Contains("Ó") || element.Contains("Ú")
+					){
+					cantPalabras++;
+				}
+			}
+			
+
+			}//
+
 			lblPalabras.Text="Palabras                    :"+cantPalabras;
 			
 
@@ -295,7 +324,7 @@ namespace ProcesadorDeTxt
 		{
 			var sFDGuardarComo = new SaveFileDialog();
 			sFDGuardarComo.Title="Guardar como...";
-			sFDGuardarComo.Filter = "Text Files (*.txt)|*.txt";//|RTF Files (*.rtf)|*.rtf"; limitar a formato rtf
+			sFDGuardarComo.Filter = "Text Files (*.txt)|*.txt";//|RTF Files (*.rtf)|*.rtf"; limitar a formato txt
 			sFDGuardarComo.AddExtension = true;
 			if (sFDGuardarComo.ShowDialog() == System.Windows.Forms.DialogResult.OK){
     			var extension = Path.GetExtension(sFDGuardarComo.FileName);
