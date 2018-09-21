@@ -53,26 +53,86 @@ namespace ProcesadorDeTxt
 		
 		
 		public void ContarTodo(){
-			    int cantPalabras = rtxTexto.Text.Split(' ', '\n', '\t').Count(); //contar palabras, ' ' es espacio
-    			// '\n' es linea nueva y '\t' es tabulador
-    			
-				
-				int caracteres=rtxTexto.Text.Length-(1*rtxTexto.Lines.Count()-1); //cuenta caracteres en cada linea
 
-    			char[] vocales = new char[] { 'a', 'e', 'i', 'o', 'u','á', 'é', 'í', 'ó', 'ú' };
-    			char[] consantes = new char[]{'b','c','d','f','g','h','j','k','l', 'm', 'n','ñ', 'p', 'q', 'r',
-    			's', 't', 'u','v', 'w', 'x', 'y', 'z'};
-    			char[] espacios = new char[] { ' ' };
-    			char[] tabuladores= new char[]{'	'};
+				
+			//int caracteres=rtxTexto.Text.Length; //cuenta caracteres en cada linea
+			/*
+			char[] numeroOSimbolo= new char[]{'1','2','3','4','5','6','7','8','9','#','Å','@','฿','¢','¢','©','º','$',
+			'£','§','™','&','¶','+','-','/','*','%','|',',','.',':',';','(',')','?','!','{','}','[',']','-','_'}; */
+    		char[] vocales = new char[] { 'a', 'e', 'i', 'o', 'u','á', 'é', 'í', 'ó', 'ú' };
+    		char[] consantes = new char[]{'b','c','d','f','g','h','j','k','l', 'm', 'n','ñ', 'p', 'q', 'r',
+    		's', 't','v', 'w', 'x', 'y', 'z'};
+    		char[] espacios = new char[] { ' ' };
+    		char[] tabuladores= new char[]{'	'};
+    			
+			int cantPalabras = 0;
+			int cantVocalesEstaString =  0;
+			int cantConsonantesEstaString = 0; 		
+			int cantLineas = 0;
+			
+			
+			//int cantNum=0;
+			
+		
+			
+			for (int i = 0; i <= rtxTexto.Lines.Count()-1; i++)
+			{
+					
+			String actual = rtxTexto.Lines[ i ];
+			cantVocalesEstaString=rtxTexto.Lines[i].Count(x => vocales.Any(y => char.ToLower(x) == y));
+			cantConsonantesEstaString =rtxTexto.Lines[i].Count(x => consantes.Any(y => char.ToLower(x) == y));
+			//cantNum+=rtxTexto.Lines[i].Count(x => Char.IsDigit(x));
+			//|| cantNum>0
+				
+			if(actual.Contains(" ") || actual.Contains("	") || cantConsonantesEstaString>0 || cantVocalesEstaString>0){
+				cantLineas++;			
+			}
+			
+			Char [] para={' ','	'};
+			String [] palabras=actual.Split(para);
+			List<String>pa=new List<String>();
+			
+			foreach (var element in palabras) {
+				pa.Add(element);
+			}
+			
+			foreach (var element in pa) {
+				//MessageBox.Show(element);
+				// if con multiples condiciones. Para mayor info, preguntele a Marcelo Aranda
+				if(element.Contains("a") || element.Contains("b") || element.Contains("c") || element.Contains("d") ||
+				   element.Contains("e") || element.Contains("f") || element.Contains("g") || element.Contains("h") ||
+				   element.Contains("i") || element.Contains("j") || element.Contains("k") || element.Contains("l") ||
+				   element.Contains("m") || element.Contains("n") || element.Contains("ñ") || element.Contains("o") ||
+				   element.Contains("p") || element.Contains("q") || element.Contains("r") || element.Contains("s") ||
+				   element.Contains("t") || element.Contains("u") || element.Contains("v") || element.Contains("w") ||
+				   element.Contains("x") || element.Contains("y") || element.Contains("z") || element.Contains("á") ||
+				   element.Contains("é") || element.Contains("í") || element.Contains("ó") || element.Contains("ú") ||
+				   element.Contains("A") || element.Contains("B") || element.Contains("C") || element.Contains("D") ||
+				   element.Contains("E") || element.Contains("F") || element.Contains("G") || element.Contains("H") ||
+				   element.Contains("I") || element.Contains("J") || element.Contains("K") || element.Contains("L") ||
+				   element.Contains("M") || element.Contains("N") || element.Contains("Ñ") || element.Contains("O") ||
+				   element.Contains("P") || element.Contains("Q") || element.Contains("R") || element.Contains("S") ||
+				   element.Contains("T") || element.Contains("U") || element.Contains("V") || element.Contains("W") ||
+				   element.Contains("X") || element.Contains("Y") || element.Contains("Z") || element.Contains("Á") ||
+				   element.Contains("É") || element.Contains("Í") || element.Contains("Ó") || element.Contains("Ú")
+					){
+					cantPalabras++;
+				}
+			}
+			
+
+			}//
+
     			
     			
     			int cantEspacios = rtxTexto.Text.Count(x => espacios.Any(y => char.ToLower(x) == y)); // cuenta espacios
     			int canTabuladores= rtxTexto.Text.Count(x => tabuladores.Any(y => char.ToLower(x) == y)); // cuenta tabuladores
-    			int cantLineas = rtxTexto.Lines.Count();
+    			//int cantLineas = rtxTexto.Lines.Count();
     			int cantVocales = rtxTexto.Text.Count(x => vocales.Any(y => char.ToLower(x) == y)); //cuenta vocales
-    			int cantConsonantes = rtxTexto.Text.Count(x => consantes.Any(y => char.ToLower(x) == y)); //cuenta consonanntes
-    			//cantPalabras=(cantPalabras)-cantEspacios;
-    			caracteres=caracteres-canTabuladores-cantEspacios;
+    			int cantConsonantes = rtxTexto.Text.Count(x => consantes.Any(y => char.ToLower(x) == y)); //cuenta consonantes
+    			//int cantNumOSimbolo = rtxTexto.Text.Count(x => numeroOSimbolo.Any()); //cuenta numeros y simbolos
+    			
+    			int caracteres= cantVocales+cantConsonantes;//+cantNum;
     			
     			
     			lblPalabras.Text="Palabras                     :"+cantPalabras;
@@ -82,6 +142,12 @@ namespace ProcesadorDeTxt
     			lblLineas.Text="Líneas                        :"+cantLineas;
     			lblVocales.Text="Vocales                      :"+cantVocales;
     			lblConsonantes.Text="Consonantes              :"+cantConsonantes;
+    			
+			
+    		if(cantVocales==0 && cantConsonantes==0){
+    			lblPalabras.Text="Palabras                     :"+0;
+    			lblCaracteres.Text="Caracteres                 :"+0;
+    		}
 		}
  
 		
@@ -128,14 +194,6 @@ namespace ProcesadorDeTxt
 				//rtxTexto.Text = Regex.Replace(rtxTexto.Text, @"\s+", ""); // remueve y junta todo	
 				rtxTexto.Text = rtxTexto.Text.Replace(" ","");//espacios
 				rtxTexto.Text = rtxTexto.Text.Replace("	","");//tabs
-				
-				/*String[] s = rtxTexto.Lines; 
-		for (int i = 0; i < s.Length; i++)
-		{
-			s[i].Replace(" ", String.Empty);
-			rtxTexto.Lines=s;
-		}
-		*/
 
 		
 			}else if(opcionSeleccionada.Nombre=="Vocales"){
@@ -214,103 +272,6 @@ namespace ProcesadorDeTxt
 			
 
 			ContarTodo();
-			
-			char[] espacios = new char[] { ' ' };
-    		char[] tabuladores= new char[]{'	'};
-			char[] vocales = new char[] { 'a', 'e', 'i', 'o', 'u','á', 'é', 'í', 'ó', 'ú' };
-    		char[] consantes = new char[]{'b','c','d','f','g','h','j','k','l', 'm', 'n','ñ', 'p', 'q', 'r',
-    		's', 't', 'u','v', 'w', 'x', 'y', 'z'};
-			
-			/*MatchCollection wordColl = Regex.Matches(rtxTexto.Text, @"[\W]+");
-			int cantPalabras=wordColl.Count;
-			lblPalabras.Text="Palabras                    :"+cantPalabras;*/
-			int cantPalabras=0;
-			int cantVocalesEstaString =  0;
-			int cantConsonantesEstaString = 0; 		
-			int cantLineas = 0;
-			
-			int cantEspacios = rtxTexto.Text.Count(x => espacios.Any(y => char.ToLower(x) == y)); // cuenta espacios
-    		int canTabuladores= rtxTexto.Text.Count(x => tabuladores.Any(y => char.ToLower(x) == y)); // cuenta tabuladores
-			
-			for (int i = 0; i <= rtxTexto.Lines.Count()-1; i++)
-			{
-					
-			String actual = rtxTexto.Lines[ i ];
-			cantVocalesEstaString=rtxTexto.Lines[i].Count(x => vocales.Any(y => char.ToLower(x) == y));
-			cantConsonantesEstaString =rtxTexto.Lines[i].Count(x => consantes.Any(y => char.ToLower(x) == y));
-			
-			if(actual.Contains(" ") || actual.Contains("	")){
-				//cantPalabras+=Regex.Matches(actual, " ").Count;
-				//cantPalabras+=Regex.Matches(actual, "	").Count;
-				cantLineas++;
-				
-				
-			}else if(cantConsonantesEstaString>0 || cantVocalesEstaString>0)  {
-					//cantPalabras++;
-					//cantLineas++;
-			}else if(!actual.Contains("")){
-				cantLineas-=1;
-			}
-			
-			Char [] para={' ','	'};
-			String [] palabras=actual.Split(para);
-			List<String>pa=new List<String>();
-			
-			foreach (var element in palabras) {
-				pa.Add(element);
-			}
-			
-			foreach (var element in pa) {
-				//MessageBox.Show(element);
-				// if con multiples condiciones. Para mayor info, preguntele a Marcelo Aranda
-				if(element.Contains("a") || element.Contains("b") || element.Contains("c") || element.Contains("d") ||
-				   element.Contains("e") || element.Contains("f") || element.Contains("g") || element.Contains("h") ||
-				   element.Contains("i") || element.Contains("j") || element.Contains("k") || element.Contains("l") ||
-				   element.Contains("m") || element.Contains("n") || element.Contains("ñ") || element.Contains("o") ||
-				   element.Contains("p") || element.Contains("q") || element.Contains("r") || element.Contains("s") ||
-				   element.Contains("t") || element.Contains("u") || element.Contains("v") || element.Contains("w") ||
-				   element.Contains("x") || element.Contains("y") || element.Contains("z") || element.Contains("á") ||
-				   element.Contains("é") || element.Contains("í") || element.Contains("ó") || element.Contains("ú") ||
-				   element.Contains("A") || element.Contains("B") || element.Contains("C") || element.Contains("D") ||
-				   element.Contains("E") || element.Contains("F") || element.Contains("G") || element.Contains("H") ||
-				   element.Contains("I") || element.Contains("J") || element.Contains("K") || element.Contains("L") ||
-				   element.Contains("M") || element.Contains("N") || element.Contains("Ñ") || element.Contains("O") ||
-				   element.Contains("P") || element.Contains("Q") || element.Contains("R") || element.Contains("S") ||
-				   element.Contains("T") || element.Contains("U") || element.Contains("V") || element.Contains("W") ||
-				   element.Contains("X") || element.Contains("Y") || element.Contains("Z") || element.Contains("Á") ||
-				   element.Contains("É") || element.Contains("Í") || element.Contains("Ó") || element.Contains("Ú")
-					){
-					cantPalabras++;
-				}
-			}
-			
-
-			}//
-
-			lblPalabras.Text="Palabras                    :"+cantPalabras;
-			
-
-			
-			int cantVocales = rtxTexto.Text.Count(x => vocales.Any(y => char.ToLower(x) == y));
-    		int cantConsonantes = rtxTexto.Text.Count(x => consantes.Any(y => char.ToLower(x) == y));
-			
-    		if(cantVocales==0 && cantConsonantes==0){
-    			lblPalabras.Text="Palabras                     :"+0;
-    		}
-			
-			/*
-				if(cantLineas==0){
-				rtxTexto.Clear();
-				ContarTodo();
-				lblPalabras.Text="Palabras                     :"+0;
-    			lblCaracteres.Text="Caracteres                 :"+0;
-				
-					
-				}*/
-			
-			
-
-			
 			
 	
 		}
