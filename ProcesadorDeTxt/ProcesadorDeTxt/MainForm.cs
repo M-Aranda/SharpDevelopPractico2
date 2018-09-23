@@ -24,6 +24,9 @@ namespace ProcesadorDeTxt
 	/// </summary>
 	public partial class MainForm : Form
 	{
+		
+		
+		
 		public MainForm()
 		{
 			
@@ -49,6 +52,7 @@ namespace ProcesadorDeTxt
 			cboQuitar.ValueMember="nombre";
 			
 		
+			
 		}
 		
 		
@@ -69,6 +73,9 @@ namespace ProcesadorDeTxt
 			int cantVocalesEstaString =  0;
 			int cantConsonantesEstaString = 0; 		
 			int cantLineas = 0;
+			int caracteres=0;
+			int simbolos=0;
+			
 			
 			
 			//int cantNum=0;
@@ -77,20 +84,40 @@ namespace ProcesadorDeTxt
 			
 			for (int i = 0; i <= rtxTexto.Lines.Count()-1; i++)
 			{
-					
+			
 			String actual = rtxTexto.Lines[ i ];
 			cantVocalesEstaString=rtxTexto.Lines[i].Count(x => vocales.Any(y => char.ToLower(x) == y));
 			cantConsonantesEstaString =rtxTexto.Lines[i].Count(x => consantes.Any(y => char.ToLower(x) == y));
 			//cantNum+=rtxTexto.Lines[i].Count(x => Char.IsDigit(x));
 			//|| cantNum>0
+			
+			
 				
-			if(actual.Contains(" ") || actual.Contains("	") || cantConsonantesEstaString>0 || cantVocalesEstaString>0){
+			if(actual.Contains(" ")  || actual.Contains("	")|| cantConsonantesEstaString>0 || cantVocalesEstaString>0 ||
+			   actual.Contains("1")  || actual.Contains("2")  || actual.Contains("3")  || actual.Contains("4")  ||
+			   actual.Contains("5")  || actual.Contains("6")  || actual.Contains("7")  || actual.Contains("8")  ||
+			   actual.Contains("9")  || actual.Contains("0")  || actual.Contains("#")  || actual.Contains("Å")  ||
+			   actual.Contains("@")  || actual.Contains("฿")  || actual.Contains("¢")  || actual.Contains("¢")  ||
+			   actual.Contains("©")  || actual.Contains("º")  || actual.Contains("£")  || actual.Contains("§")  ||
+			   actual.Contains("¶")  || actual.Contains("$")  || actual.Contains("™")  || actual.Contains("&")  ||
+			   actual.Contains("/")  || actual.Contains("+")  || actual.Contains("-")  || actual.Contains("*")  ||
+			   actual.Contains(".")  || actual.Contains("%")  || actual.Contains("|")  || actual.Contains(",")  ||
+			   actual.Contains(";")  || actual.Contains(":")  || actual.Contains("(")  || actual.Contains(")")  ||
+			   actual.Contains("?")  || actual.Contains("!")  || actual.Contains("-")  || actual.Contains("_")  ||
+			   actual.Contains("<")  || actual.Contains(">")  || actual.Contains("{")  || actual.Contains("}")  ||
+			   actual.Contains("[")  || actual.Contains("]")  || actual.Contains("¿")  || actual.Contains("¡")  ||
+			   actual.Contains("`")  || actual.Contains("'") 
+			  
+			  
+			  
+			  ){
 				cantLineas++;			
 			}
 			
-			Char [] para={' ','	'};
-			String [] palabras=actual.Split(para);
-			List<String>pa=new List<String>();
+			Char [] para = {' ','	'};
+			String [] palabras = actual.Split(para);
+			List<String> pa = new List<String>();
+			
 			
 			foreach (var element in palabras) {
 				pa.Add(element);
@@ -120,8 +147,36 @@ namespace ProcesadorDeTxt
 				}
 			}
 			
+			
+			
+			var res = actual.Select(x => new String(x, 1)).ToArray();
+			List<String>listaDeCaracteres= new List<String>();
+			foreach (var element in res) {
+				listaDeCaracteres.Add(element);
+			}
+			
+			foreach (var element in listaDeCaracteres) {
+				if(
+				   element.Contains("1")  || element.Contains("2")  || element.Contains("3")  || element.Contains("4")  ||
+				   element.Contains("5")  || element.Contains("6")  || element.Contains("7")  || element.Contains("8")  ||
+				   element.Contains("9")  || element.Contains("0")  || element.Contains("#")  || element.Contains("Å")  ||
+				   element.Contains("@")  || element.Contains("฿")  || element.Contains("¢")  || element.Contains("¢")  ||
+				   element.Contains("©")  || element.Contains("º")  || element.Contains("£")  || element.Contains("§")  ||
+				   element.Contains("¶")  || element.Contains("$")  || element.Contains("™")  || element.Contains("&")  ||
+				   element.Contains("/")  || element.Contains("+")  || element.Contains("-")  || element.Contains("*")  ||
+				   element.Contains(".")  || element.Contains("%")  || element.Contains("|")  || element.Contains(",")  ||
+				   element.Contains(";")  || element.Contains(":")  || element.Contains("(")  || element.Contains(")")  ||
+				   element.Contains("?")  || element.Contains("!")  || element.Contains("-")  || element.Contains("_")  ||
+				   element.Contains("<")  || element.Contains(">")  || element.Contains("{")  || element.Contains("}")  ||
+				   element.Contains("[")  || element.Contains("]")  || element.Contains("¿")  || element.Contains("¡")  ||
+				   element.Contains("`")  || element.Contains("'")  ){
+					simbolos++;
+				}
+			}
 
-			}//
+			
+
+			}
 
     			
     			
@@ -132,7 +187,7 @@ namespace ProcesadorDeTxt
     			int cantConsonantes = rtxTexto.Text.Count(x => consantes.Any(y => char.ToLower(x) == y)); //cuenta consonantes
     			//int cantNumOSimbolo = rtxTexto.Text.Count(x => numeroOSimbolo.Any()); //cuenta numeros y simbolos
     			
-    			int caracteres= cantVocales+cantConsonantes;//+cantNum;
+    			 caracteres= cantVocales+cantConsonantes+simbolos;//cantVocales+cantConsonantes;
     			
     			
     			lblPalabras.Text="Palabras                     :"+cantPalabras;
@@ -144,10 +199,10 @@ namespace ProcesadorDeTxt
     			lblConsonantes.Text="Consonantes              :"+cantConsonantes;
     			
 			
-    		if(cantVocales==0 && cantConsonantes==0){
+    		/*if(cantVocales==0 && cantConsonantes==0){
     			lblPalabras.Text="Palabras                     :"+0;
     			lblCaracteres.Text="Caracteres                 :"+0;
-    		}
+    		}*/
 		}
  
 		
